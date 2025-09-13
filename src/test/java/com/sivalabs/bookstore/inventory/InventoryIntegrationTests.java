@@ -1,12 +1,10 @@
 package com.sivalabs.bookstore.inventory;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import com.sivalabs.bookstore.TestcontainersConfiguration;
-import com.sivalabs.bookstore.inventory.internal.InventoryService;
-import com.sivalabs.bookstore.orders.domain.events.OrderCreatedEvent;
-import java.time.Duration;
+import com.sivalabs.bookstore.orders.domain.models.Customer;
+import com.sivalabs.bookstore.orders.domain.models.OrderCreatedEvent;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,9 @@ class InventoryIntegrationTests {
 
     @Test
     void handleOrderCreatedEvent(Scenario scenario) {
-        scenario.publish(new OrderCreatedEvent(UUID.randomUUID().toString(), "P100", 2, 1L))
-                .andWaitAtMost(Duration.ofSeconds(1))
-                .andWaitForStateChange(() -> inventoryService.getStockLevel("P100"))
-                .andVerify(stockLevel -> assertThat(stockLevel).isEqualTo(98));
+        var customer = new Customer("Siva", "siva@gmail.com", "9987654");
+        String productCode = "P114";
+        var event = new OrderCreatedEvent(UUID.randomUUID().toString(), productCode, 2, customer);
+        scenario.publish(event).andWaitForStateChange(() -> inventoryService.getStockLevel(productCode) == 598);
     }
 }

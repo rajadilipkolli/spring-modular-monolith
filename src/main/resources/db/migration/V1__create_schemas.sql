@@ -1,4 +1,4 @@
-CREATE SCHEMA customers;
 CREATE SCHEMA catalog;
 CREATE SCHEMA orders;
+CREATE SCHEMA inventory;
 CREATE SCHEMA events;
