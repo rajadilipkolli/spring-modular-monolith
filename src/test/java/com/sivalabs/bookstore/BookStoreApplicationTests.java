@@ -4,10 +4,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
-@Import(TestcontainersConfiguration.class)
+@SpringBootTest(webEnvironment = RANDOM_PORT, classes = TestcontainersConfiguration.class)
 class BookStoreApplicationTests {
 
     @Test

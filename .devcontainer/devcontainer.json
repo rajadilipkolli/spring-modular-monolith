@@ -26,7 +26,7 @@
 		"vscode": {
 			"extensions": [
 				"vscjava.vscode-java-pack",
-				"ms-vscode.powershell",
+				"vmware.vscode-boot-dev-pack",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
 				"mindaro.mindaro"
 			]
